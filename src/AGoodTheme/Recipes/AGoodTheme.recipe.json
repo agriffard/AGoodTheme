@@ -1,0 +1,583 @@
+{
+  "name": "A Good Theme",
+  "displayName": "A Good Theme",
+  "description": "Provides a theme to display a resume.",
+  "author": "Antoine Griffard",
+  "website": "http://antoinegriffard.com",
+  "version": "2.0",
+  "issetuprecipe": true,
+  "categories": [ "default" ],
+  "tags": [ "site" ],
+
+  // The variables are evaluated the first time they are accessed, and reused across steps
+  "variables": {
+    "defaultContentItemId": "[js:uuid()]"
+  },
+  "steps": [
+    {
+      "name": "Feature",
+      "enable": [
+        "OrchardCore.Settings",
+        "OrchardCore.Admin",
+        "OrchardCore.Contents",
+        "OrchardCore.ShortCodes",
+        "OrchardCore.Liquid",
+        "OrchardCore.Templates",
+        "OrchardCore.ContentTypes",
+        "OrchardCore.Alias",
+        "OrchardCore.Autoroute",
+        "OrchardCore.ContentFields",
+        "OrchardCore.ContentPreview",
+        "OrchardCore.Contents.FileContentDefinition",
+        "OrchardCore.CustomSettings",
+        "OrchardCore.Deployment",
+        "OrchardCore.Deployment.Remote",
+        "OrchardCore.Diagnostics",
+        "OrchardCore.DynamicCache",
+        "OrchardCore.Resources",
+        "OrchardCore.Widgets",
+        "OrchardCore.Features",
+        "OrchardCore.Feeds",
+        "OrchardCore.Flows",
+        "OrchardCore.HomeRoute",
+        "OrchardCore.Html",
+        "OrchardCore.Indexing",
+        "OrchardCore.Scripting",
+        "OrchardCore.Layers",
+        "OrchardCore.Lists",
+        "OrchardCore.Lucene",
+        "OrchardCore.Markdown",
+        "OrchardCore.Media",
+        "OrchardCore.Title",
+        "OrchardCore.Menu",
+        "OrchardCore.Navigation",
+        "OrchardCore.Queries",
+        "OrchardCore.Users",
+        "OrchardCore.Recipes",
+        "OrchardCore.Roles",
+        "OrchardCore.Themes",
+        "AGoodTheme",
+        "TheAdmin"
+      ]
+    },
+    {
+      "name": "Themes",
+      "Site": "AGoodTheme",
+      "Admin": "TheAdmin"
+    },
+    {
+      "name": "ContentDefinition",
+      "ContentTypes": [
+        {
+          "Name": "Menu",
+          "DisplayName": "Menu",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Listable": true,
+              "Draftable": true,
+              "Versionable": true
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "AliasPart",
+              "Name": "AliasPart",
+              "Settings": {
+                "AliasPartSettings": {
+                  "Pattern": "{{ ContentItem | display_text | slugify }}"
+                },
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            },
+            {
+              "PartName": "MenuPart",
+              "Name": "MenuPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "2"
+                }
+              }
+            },
+            {
+              "PartName": "MenuItemsListPart",
+              "Name": "MenuItemsListPart",
+              "Settings": {}
+            }
+          ]
+        },
+        {
+          "Name": "LinkMenuItem",
+          "DisplayName": "Link Menu Item",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Stereotype": "MenuItem"
+            }
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "LinkMenuItemPart",
+              "Name": "LinkMenuItemPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "LinkMenuItem",
+              "Name": "LinkMenuItem",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "ContentMenuItem",
+          "DisplayName": "Content Menu Item",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Stereotype": "MenuItem"
+            },
+            "FullTextAspectSettings": {}
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "ContentMenuItemPart",
+              "Name": "ContentMenuItemPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": "ContentMenuItem",
+              "Name": "ContentMenuItem",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Page",
+          "DisplayName": "Page",
+          "Settings": {
+            "ContentTypeSettings": {
+              "Creatable": true,
+              "Listable": true,
+              "Draftable": true,
+              "Versionable": true,
+              "Securable": true
+            },
+            "FullTextAspectSettings": {}
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "Page",
+              "Name": "Page",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "3"
+                }
+              }
+            },
+            {
+              "PartName": "AutoroutePart",
+              "Name": "AutoroutePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "1"
+                },
+                "AutoroutePartSettings": {
+                  "AllowCustomPath": true,
+                  "Pattern": "{{ ContentItem | display_text | slugify }}",
+                  "ShowHomepageOption": true,
+                  "AllowUpdatePath": true
+                }
+              }
+            },
+            {
+              "PartName": "HtmlBodyPart",
+              "Name": "HtmlBodyPart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "2",
+                  "Editor": "Wysiwyg"
+                },
+                "HtmlBodyPartSettings": {}
+              }
+            },
+            {
+              "PartName": "TitlePart",
+              "Name": "TitlePart",
+              "Settings": {
+                "ContentTypePartSettings": {
+                  "Position": "0"
+                }
+              }
+            },
+            {
+              "PartName": null,
+              "Name": "RichHtml",
+              "Settings": {
+                "Creatable": "False",
+                "Draftable": "True",
+                "Versionable": "False",
+                "Listable": "False",
+                "Securable": "True",
+                "Stereotype": "Widget"
+              }
+            }
+          ]
+        },
+        {
+          "Name": "Content",
+          "DisplayName": "Content",
+          "Settings": {},
+          "ContentTypePartDefinitionRecords": []
+        },
+        {
+          "Name": "RawHtml",
+          "DisplayName": "Raw Html",
+          "Settings": {
+            "Creatable": "False",
+            "Draftable": "True",
+            "Listable": "False",
+            "Securable": "True",
+            "Stereotype": "Widget"
+          },
+          "ContentTypePartDefinitionRecords": [
+            {
+              "PartName": "RawHtml",
+              "Name": "RawHtml",
+              "Settings": {
+                "Position": "0"
+              }
+            }
+          ]
+        }
+      ],
+      "ContentParts": [
+        {
+          "Name": "LiquidPart",
+          "Settings": {
+            "ContentPartSettings": {}
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "CommonPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides an editor for the common properties of a content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "AliasPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides a way to define custom aliases for content items."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "AutoroutePart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides a custom url for your content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "PreviewPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides a way to define the url that is used to render your content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "WidgetsListPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides a way to add widgets per content items."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "FlowPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides a customizable body for your content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "BagPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Reusable": true,
+              "Description": "Provides a collection behavior for your content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "HtmlBodyPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides an HTML Body for your content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "ListPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Add a list behavior."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "MarkdownBodyPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides a Markdown formatted body for your content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "TitlePart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides a Title for your content item.",
+              "DefaultPosition": "0"
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "MenuPart",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "MenuItemPart",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "LinkMenuItemPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "Description": "Provides a menu link behavior for your content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": []
+        },
+        {
+          "Name": "ContentMenuItemPart",
+          "Settings": {
+            "ContentPartSettings": {
+              "Attachable": true,
+              "DisplayName": "Content Menu Item",
+              "Description": "Provides a menu link behavior with the Content Picker for your content item."
+            }
+          },
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "ContentPickerField",
+              "Name": "SelectedContentItem",
+              "Settings": {
+                "ContentPartFieldSettings": {
+                  "DisplayName": "Selected Content Item",
+                  "Position": "0"
+                },
+                "ContentPickerFieldSettings": {
+                  "Required": true,
+                  "DisplayAllContentTypes": true,
+                  "DisplayedContentTypes": []
+                },
+                "ContentIndexSettings": {}
+              }
+            }
+          ]
+        },
+        {
+          "Name": "RawHtml",
+          "Settings": {},
+          "ContentPartFieldDefinitionRecords": [
+            {
+              "FieldName": "HtmlField",
+              "Name": "Content",
+              "Settings": {
+                "DisplayName": "Content",
+                "ContentIndexSettings": {},
+                "Hint": null,
+                "Editor": "Multiline",
+                "Position": "0",
+                "ContentPartFieldSettings": {
+                  "DisplayName": "HtmlField"
+                },
+                "HtmlFieldSettings": {
+                  "SanitizeHtml": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Content",
+      "data": [
+        {
+          "ContentItemId": "465b7cqjswpas25awnzt4xstww",
+          "ContentItemVersionId": "4nq3z754575e765126qbwd5r4j",
+          "ContentType": "Page",
+          "DisplayText": "Welcome",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "2020-05-23T14:03:33.3930542Z",
+          "PublishedUtc": "2020-05-23T14:03:33.7539058Z",
+          "CreatedUtc": "2020-05-21T17:45:23.8868907Z",
+          "Owner": "admin",
+          "Author": "admin",
+          "Page": {},
+          "AutoroutePart": {
+            "Path": "home",
+            "SetHomepage": true,
+            "Disabled": false,
+            "RouteContainedItems": false,
+            "Absolute": false
+          },
+          "HtmlBodyPart": {
+            "Html": "<p>Orchard Core theme with Bootstrap</p>"
+          },
+          "TitlePart": {
+            "Title": "Welcome"
+          }
+        },
+        {
+          "ContentItemId": "49jhfj7txq07s6pdjtv16a56d1",
+          "ContentItemVersionId": "45198gwvfd05f6h5pk5z05jm5z",
+          "ContentType": "Menu",
+          "DisplayText": "Main menu",
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "2020-05-23T14:03:57.9728361Z",
+          "PublishedUtc": "2020-05-23T14:03:57.984527Z",
+          "CreatedUtc": "2020-05-21T17:59:41.0419597Z",
+          "Owner": "admin",
+          "Author": "admin",
+          "TitlePart": {
+            "Title": "Main menu"
+          },
+          "AliasPart": {
+            "Alias": "main-menu"
+          },
+          "MenuPart": {},
+          "MenuItemsListPart": {
+            "MenuItems": [
+              {
+                "ContentItemId": "4y411kcsferafrphgcp8d08r5a",
+                "ContentItemVersionId": null,
+                "ContentType": "LinkMenuItem",
+                "DisplayText": null,
+                "Latest": false,
+                "Published": false,
+                "ModifiedUtc": "2020-05-21T18:04:31.5337688Z",
+                "PublishedUtc": null,
+                "CreatedUtc": null,
+                "Owner": null,
+                "Author": "admin",
+                "LinkMenuItemPart": {
+                  "Name": "Home",
+                  "Url": "~/"
+                },
+                "LinkMenuItem": {},
+                "MenuItemsListPart": {
+                  "MenuItems": []
+                }
+              }
+            ]
+          },
+          "@WeldedPartSettings": {
+            "MenuPart": {
+              "Position": "3"
+            },
+            "MenuItemsListPart": {
+              "Position": "4"
+            }
+          }
+        },
+        {
+          "ContentItemId": "4ny1sy74214j77f3bnsgwpp9dz",
+          "ContentItemVersionId": "4mb6k33n3yeac7wbwksefttc46",
+          "ContentType": "RawHtml",
+          "DisplayText": null,
+          "Latest": true,
+          "Published": true,
+          "ModifiedUtc": "2020-05-23T14:09:01.4910738Z",
+          "PublishedUtc": "2020-05-23T14:09:01.4968468Z",
+          "CreatedUtc": "2020-05-23T14:06:29.7993548Z",
+          "Owner": "admin",
+          "Author": "admin",
+          "DisplayName": "Footer",
+          "Number": 4,
+          "RawHtml": {
+            "Content": {
+              "Html": "<footer class=\"border-top footer text-muted\">        <div class=\"container\">            &copy; 2020 - A Good Theme        </div>    </footer>"
+            }
+          },
+          "LayerMetadata": {
+            "RenderTitle": false,
+            "Position": 1.0,
+            "Zone": "Footer",
+            "Layer": "Always",
+            "Title": "Footer"
+          }
+        }
+      ]
+    }
+  ]
+}
